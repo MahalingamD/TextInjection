@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TextInjection</string>
+    <string name="accessibility_service_description">Service Description</string>
+    <string name="accessibility_service_label">Access label</string>
+</resources>
