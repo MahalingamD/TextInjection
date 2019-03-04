@@ -1,6 +1,7 @@
 package com.maha.textinjection;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -19,21 +20,23 @@ public class MainActivity extends AppCompatActivity {
       super.onCreate( savedInstanceState );
       setContentView( R.layout.activity_main );
 
-      boolean abool=MyAccessibilityService.isAccessibilitySettingsOn(this);
+      boolean abool = MyAccessibilityService.isAccessibilitySettingsOn( this );
 
-      if(abool){
-         Log.e( "Enable" ,"success");
-      }else{
+      if( abool ) {
+         Log.e( "Enable", "success" );
+      } else {
 
-         showAlertDialog(this,"Enable GOTO setting -> Accessibility->TextInjection");
+         showAlertDialog( this, "Enable GOTO setting -> Accessibility->TextInjection" );
       }
+
+      ;
    }
 
 
    /**
     * @param aMessage aMessage
     */
-   public  void showAlertDialog( final AppCompatActivity aContext, String aMessage ) {
+   public void showAlertDialog( final AppCompatActivity aContext, String aMessage ) {
       try {
          AlertDialog.Builder builder = new AlertDialog.Builder( aContext );
          builder.setMessage( aMessage )
@@ -41,7 +44,14 @@ public class MainActivity extends AppCompatActivity {
                  .setCancelable( false )
                  .setPositiveButton( "Ok", new DialogInterface.OnClickListener() {
                     public void onClick( DialogInterface dialog, int id ) {
+
+
+                       Intent intent = new Intent( android.provider.Settings.ACTION_SETTINGS );
+                       intent.addFlags( Intent.FLAG_ACTIVITY_NEW_TASK );
+                       MainActivity.this.startActivity( intent );
+
                        dialog.dismiss();
+
                     }
                  } );
 
